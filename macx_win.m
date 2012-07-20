@@ -605,6 +605,22 @@ void APIENTRY glutScrollFunc(void (*func)(float dx, float dy))
    GLUTAPI_END_FAST
 }
 
+void APIENTRY glutZoomFunc(void (*func)(float dy))
+{
+    GLUTAPI_DECLARATIONS_FAST
+    GLUTAPI_BEGIN_FAST
+    [__glutCurrentView setZoomCallback: func];
+    GLUTAPI_END_FAST
+}
+
+void APIENTRY glutRotateFunc(void (*func)(float dr))
+{
+    GLUTAPI_DECLARATIONS_FAST
+    GLUTAPI_BEGIN_FAST
+    [__glutCurrentView setRotateCallback: func];
+    GLUTAPI_END_FAST
+}
+
 void APIENTRY glutPassiveMotionFunc(void (*func)(int x, int y))
 {
    GLUTAPI_DECLARATIONS_FAST

@@ -413,6 +413,8 @@ static GLUTView *	__glutVisibilityUpdateTail = NULL;
 - (void)setMouseCallback: (GLUTmouseCB)func { _mouseFunc = func; }
 - (void)setMotionCallback: (GLUTpassiveCB)func { _motionFunc = func; }
 - (void)setScrollCallback: (GLUTscrollCB)func { _scrollFunc = func; }
+- (void)setZoomCallback: (GLUTzoomCB)func { _zoomFunc = func; }
+- (void)setRotateCallback: (GLUTrotateCB)func { _rotateFunc = func; }
 - (void)setSpecialDownCallback: (GLUTspecialCB)func { _specialFunc = func; }
 - (void)setSpecialUpCallback: (GLUTspecialCB)func { _specialUpFunc = func; }
 
@@ -1719,6 +1721,24 @@ GLUquadricObj *__glutGetQuadObj(void)
       }
       if(dx != 0.0f || dy != 0.0f) (*_scrollFunc)(dx, dy);
    }
+}
+
+- (void)magnifyWithEvent: (NSEvent *)theEvent
+{
+    if(_zoomFunc) {
+        __glutSetWindow(self);
+        float dm = theEvent.magnification;
+        if(dm != 0.0f) (*_zoomFunc)(dm);
+    }
+}
+
+- (void)rotateWithEvent: (NSEvent *)theEvent
+{
+    if(_rotateFunc) {
+        __glutSetWindow(self);
+        float dr = theEvent.rotation;
+        if(dr != 0.0f) (*_rotateFunc)(dr);
+    }
 }
 
 /* Right mouse */

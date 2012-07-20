@@ -30,6 +30,8 @@
    GLUTmouseCB          _mouseFunc;
    GLUTmotionCB         _motionFunc;
    GLUTscrollCB         _scrollFunc;
+   GLUTzoomCB           _zoomFunc;
+   GLUTrotateCB         _rotateFunc;
    GLUTpassiveCB        _passiveMotionFunc;
    GLUTentryCB          _entryFunc;
    GLUTspecialCB        _specialFunc;
@@ -139,6 +141,8 @@
 - (void)setMouseCallback: (GLUTmouseCB)func;
 - (void)setMotionCallback: (GLUTmotionCB)func;
 - (void)setScrollCallback: (GLUTscrollCB)func;
+- (void)setZoomCallback: (GLUTzoomCB)func;
+- (void)setRotateCallback: (GLUTrotateCB)func;
 - (void)setPassiveMotionCallback: (GLUTpassiveCB)func;
 - (void)setEntryCallback: (GLUTentryCB)func;
 - (void)setSpecialDownCallback: (GLUTspecialCB)func;
