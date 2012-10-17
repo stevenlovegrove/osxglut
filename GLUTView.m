@@ -1713,6 +1713,7 @@ GLUquadricObj *__glutGetQuadObj(void)
 {
    if(_scrollFunc) {
       __glutSetWindow(self);
+      __glutModifierMask = [theEvent modifierFlags];
       float dx, dy;
       if([theEvent respondsToSelector:@selector(scrollingDeltaX)]) {
          dx = theEvent.scrollingDeltaX; dy = theEvent.scrollingDeltaY;
@@ -1720,6 +1721,7 @@ GLUquadricObj *__glutGetQuadObj(void)
          dx = theEvent.deviceDeltaX; dy = theEvent.deviceDeltaY;
       }
       if(dx != 0.0f || dy != 0.0f) (*_scrollFunc)(dx, dy);
+       __glutModifierMask = ~0;
    }
 }
 
@@ -1727,8 +1729,10 @@ GLUquadricObj *__glutGetQuadObj(void)
 {
     if(_zoomFunc) {
         __glutSetWindow(self);
+        __glutModifierMask = [theEvent modifierFlags];
         float dm = theEvent.magnification;
         if(dm != 0.0f) (*_zoomFunc)(dm);
+        __glutModifierMask = ~0;
     }
 }
 
@@ -1736,8 +1740,10 @@ GLUquadricObj *__glutGetQuadObj(void)
 {
     if(_rotateFunc) {
         __glutSetWindow(self);
+        __glutModifierMask = [theEvent modifierFlags];
         float dr = theEvent.rotation;
         if(dr != 0.0f) (*_rotateFunc)(dr);
+        __glutModifierMask = ~0;
     }
 }
 
