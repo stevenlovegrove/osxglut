@@ -414,6 +414,7 @@ static GLUTView *	__glutVisibilityUpdateTail = NULL;
 - (void)setMotionCallback: (GLUTpassiveCB)func { _motionFunc = func; }
 - (void)setScrollCallback: (GLUTscrollCB)func { _scrollFunc = func; }
 - (void)setZoomCallback: (GLUTzoomCB)func { _zoomFunc = func; }
+- (void)setSubpixMotionCallback: (GLUTsubpixMotionCB)func { _subpixMotionFunc = func; }
 - (void)setRotateCallback: (GLUTrotateCB)func { _rotateFunc = func; }
 - (void)setSpecialDownCallback: (GLUTspecialCB)func { _specialFunc = func; }
 - (void)setSpecialUpCallback: (GLUTspecialCB)func { _specialUpFunc = func; }
@@ -530,9 +531,9 @@ static GLUTView *	__glutVisibilityUpdateTail = NULL;
    if(!_flags.isSubwindow) {
       _wmCloseFunc = func;
       /* Enabled/disable window close button */
-      if(_wmCloseFunc == __glutDefaultWMClose)
-         [[[self window] standardWindowButton: NSWindowCloseButton] setEnabled: NO];
-      else
+      //if(_wmCloseFunc == __glutDefaultWMClose)
+      //   [[[self window] standardWindowButton: NSWindowCloseButton] setEnabled: NO];
+      //else
          [[[self window] standardWindowButton: NSWindowCloseButton] setEnabled: YES];
    }
 }
@@ -1668,6 +1669,14 @@ GLUquadricObj *__glutGetQuadObj(void)
       __glutSetWindow(self);
       (*_motionFunc)(rint(location.x), rint(location.y));
    }
+    
+    if( _subpixMotionFunc ) {
+        NSPoint	location  = [self convertPoint: [theEvent locationInWindow] fromView: nil];
+        
+        __glutSetWindow(self);
+
+        (*_subpixMotionFunc)(location.x, location.y, theEvent.pressure, theEvent.rotation, theEvent.tilt.x, theEvent.tilt.y);
+    }
 }
 
 /* Left mouse */

@@ -64,6 +64,7 @@ _glutMouseFunc
 _glutMotionFunc
 _glutScrollFunc
 _glutZoomFunc
+_glutSubpixMotionFunc
 _glutRotateFunc
 _glutPassiveMotionFunc
 _glutEntryFunc

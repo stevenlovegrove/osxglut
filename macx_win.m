@@ -621,6 +621,14 @@ void APIENTRY glutRotateFunc(void (*func)(float dr))
     GLUTAPI_END_FAST
 }
 
+void APIENTRY glutSubpixMotionFunc(void (*func)(float x, float y, float pressure, float rotation, float tiltx, float tilty))
+{
+    GLUTAPI_DECLARATIONS_FAST
+    GLUTAPI_BEGIN_FAST
+    [__glutCurrentView setSubpixMotionCallback: func];
+    GLUTAPI_END_FAST
+}
+
 void APIENTRY glutPassiveMotionFunc(void (*func)(int x, int y))
 {
    GLUTAPI_DECLARATIONS_FAST
