@@ -31,6 +31,8 @@ int APIENTRY glutGetModifiers(void)
       modifiers |= GLUT_ACTIVE_CTRL;
    if(__glutModifierMask & NSAlternateKeyMask)
       modifiers |= GLUT_ACTIVE_ALT;
+   if(__glutModifierMask & NSCommandKeyMask)
+      modifiers |= GLUT_ACTIVE_CMD;
    return modifiers;
 }
 /* ENDCENTRY */

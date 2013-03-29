@@ -384,6 +384,7 @@ extern void *glutBitmapHelvetica18;
 #define GLUT_ACTIVE_SHIFT               1
 #define GLUT_ACTIVE_CTRL                2
 #define GLUT_ACTIVE_ALT                 4
+#define GLUT_ACTIVE_CMD                 8
 
 /* glutSetCursor parameters. */
 /* Basic arrows. */
